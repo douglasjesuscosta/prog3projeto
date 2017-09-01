@@ -1,0 +1,60 @@
+<xs:schema xmlns:tns="http://viewController/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://viewController/" version="1.0">
+
+  <xs:element name="executeAction" type="tns:executeAction"/>
+
+  <xs:element name="executeActionResponse" type="tns:executeActionResponse"/>
+
+  <xs:complexType name="executeAction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:pack"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pack">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="action" type="tns:actions"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="listModel" nillable="true" type="tns:model"/>
+      <xs:element minOccurs="0" name="modelObject" type="tns:model"/>
+      <xs:element minOccurs="0" name="return" type="tns:return"/>
+      <xs:element name="searchParamethers">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string"/>
+                  <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="model">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="return">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="executeActionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:pack"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="actions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INSERT"/>
+      <xs:enumeration value="DELETE"/>
+      <xs:enumeration value="UPDATE"/>
+      <xs:enumeration value="SELECT"/>
+      <xs:enumeration value="AUTENTIFY"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
